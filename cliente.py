@@ -44,6 +44,7 @@ while True:
         if mensagem.startswith('unicast '):
             partes = mensagem.split(' ', 1)
             if len(partes) == 2:
+                print('Voce entrou no modo mensagem PRIVADA, digite "sair do unicast" a qualquer momento para sair.')
                 modo_unicast = True
 
 

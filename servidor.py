@@ -19,7 +19,6 @@ def receber_dados(sock_conn, endereco):
             if mensagem == 'sair': 
                 print(f"{nome} saiu do chat.")
                 broadcast(f'{nome} saiu do chat.',sock_conn)
-                sock_conn.sendall(f'Voce saiu do chat.'.encode())
                 del clientes[nome]
                 sock_conn.close()
                 return     
