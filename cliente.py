@@ -40,12 +40,13 @@ while True:
         if mensagem == 'sair do unicast':
             modo_unicast = False
             print("Você voltou ao chat público.")
-            socket_cliente.sendall(mensagem.encode())
-            continue
-        socket_cliente.sendall(mensagem.encode())  # Envia a mensagem privada para o destinatário escolhido
     else:
-        socket_cliente.sendall(mensagem.encode()) # envia msg
-        if mensagem == 'unicast' and not modo_unicast:
-            modo_unicast = True
-            destinatario = input(f"Digite o nome do destinatário: ")
-            socket_cliente.sendall(destinatario.encode())  # Envia o nome do destinatário ao servidor
+        if mensagem.startswith('unicast '):
+            partes = mensagem.split(' ', 1)
+            if len(partes) == 2:
+                modo_unicast = True
+
+
+            
+    socket_cliente.sendall(mensagem.encode()) # envia a mensagem pro servidor tratar independentemente se for broadcast ou unicast
+                                              # como trata: A função unicast cria um loop exclusivo para troca de mensagens privadas entre o remetente e o destinatário, quando o servidor entra na função unicast, ele não retorna mais ao loop principal do servidor até que o unicast seja encerrado (com o comando sair do unicast)
